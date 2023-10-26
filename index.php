@@ -16,8 +16,6 @@
 $mensaje_sesion = isset($_GET['mensaje']) ? $_GET['mensaje'] : "";
 echo " " . urldecode($mensaje_sesion) . " ";
 
-?>
-<?php
 require_once('Vista/00-utilidades/preloader.php');
 ?>
 <nav class="navbar bg-body-tertiary">
