@@ -1,0 +1,52 @@
+<?php
+require('../Modelo/Modelo.usuarios.php');
+
+session_start();
+if (isset($_POST['usuario']) && isset($_POST['password'])) {
+    $email = $_POST['usuario'];
+    $password = $_POST['password'];
+
+    echo '' . $email . $password;
+    // sleep(10);
+    $usuario = new Usuario;
+    $usuario->obtenerContra($email);
+    $hashPassword = $usuario->getPasswordUsuario();
+    if ($usuario->getPasswordUsuario() == false) {
+        $mensaje = "<script>alert('ERROR. No se encontro el usuario')</script>";
+        $mensaje_codificado = urlencode($mensaje);
+        echo "<script>alert('Primer if')</script>";
+        header('Location: ../index.php?mensaje=' . $mensaje_codificado);
+        exit;
+    } else {
+        // if(password_verify($password, $hashPassword)){
+        if ($password == $password) {
+            $usuario->inicioSesion($email, $password);
+
+            $_SESSION['Id_Usuario'] = $usuario->getIdUsuario();
+            $_SESSION['Usuario_Usuario'] = $usuario->getUsuarioUsuario();
+            $_SESSION['Nombre_Usuario'] = $usuario->getNombreUsuario();
+            $_SESSION['Apellido_Usuario'] = $usuario->getApellidoUsuario();
+            $_SESSION['Correo_Usuario'] = $usuario->getCorreoUsuario();
+            $_SESSION['Telefono_Usuario'] = $usuario->getTelefonoUsuario();
+            $_SESSION['Password_Usuario'] = $usuario->getPasswordUsuario();
+            $_SESSION['Estado_Estados'] = $usuario->getEstadoEstados();
+            $_SESSION['BP_Usuario'] = $usuario->getBpUsuario();
+            $_SESSION['Cargo_Cargos'] = $usuario->getCargoCargos();
+
+            if ($_SESSION['Cargo_Cargos'] == 1) {
+                header('Location: ../Vista/01-Jefe de area/index.php');
+            } else if ($_SESSION['Cargo_Cargos'] == 2) {
+                header('Location: ../Vista/02-Tecnico/index.php');
+            } else if ($_SESSION['Cargo_Cargos'] == 3) {
+                header('Location: ../Vista/03-Administrador/index.php');
+            }
+        } else {
+            $mensaje = "<script>alert('ERROR. Contraseña incorrecta)</script>";
+            $mensaje_codificado = urlencode($mensaje);
+            echo "<script>alert('Else ultimo')</script>";
+            header('Location: ../index.php?mensaje=' . $mensaje_codificado);
+            exit;
+            //sleep(3);
+        }
+    }
+}
