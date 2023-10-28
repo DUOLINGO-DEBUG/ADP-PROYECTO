@@ -13,6 +13,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
 //Mensaje
+
+
 $mensaje_sesion = isset($_GET['mensaje']) ? $_GET['mensaje'] : "";
 echo " " . urldecode($mensaje_sesion) . " ";
 
@@ -85,6 +87,8 @@ require_once('Vista/00-utilidades/preloader.php');
                                 <img src="https://placehold.co/1000x500?text=MANUALES" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5 class="color_zacamil">Manuales ADP</h5>
+                                    <!-- <a href="#" class="btn btn-dark">WAZA</a> -->
+                                    <button class="btn_Zacamil" id="downloadButton">Click pls</button>
                                     <p class="color_zacamil">No olvides consultar tu manual de usuario.</p>
                                 </div>
                             </div>
@@ -119,6 +123,15 @@ require_once('Vista/00-utilidades/preloader.php');
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/animacion.js"></script>
+
+    <script>
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            // Realizar una solicitud HTTP al script PHP para descargar el archivo
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'descargar.php', true);
+            xhr.send();
+        });
+    </script>
 </body>
 
 </html>
