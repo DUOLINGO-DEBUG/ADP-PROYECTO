@@ -1,5 +1,6 @@
 <?php
 require('../Modelo/Modelo.usuarios.php');
+require('ctr.encriptacion.php');
 
 session_start();
 if (isset($_POST['usuario']) && isset($_POST['password'])) {
@@ -13,9 +14,9 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
     $hashPassword = $usuario->getPasswordUsuario();
     if ($usuario->getPasswordUsuario() == false) {
         $mensaje = "<script>alert('ERROR. No se encontro el usuario')</script>";
-        $mensaje_codificado = urlencode($mensaje);
-        echo "<script>alert('Primer if')</script>";
-        header('Location: ../index.php?mensaje=' . $mensaje_codificado);
+        
+        $MensajeEncriptado = encriptar($mensaje);
+        header('Location: ../index.php?mensaje=' . $MensajeEncriptado);
         exit;
     } else {
         // if(password_verify($password, $hashPassword)){

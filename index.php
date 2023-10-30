@@ -14,9 +14,29 @@
 <?php
 //Mensaje
 
+$plaintext = "Jonnathan Alexander Urquilla Munoz";
+$clave = "71287345";
+$metodo = "aes-256-cbc"; // Método de cifrado
+$iv = random_bytes(16);
 
 $mensaje_sesion = isset($_GET['mensaje']) ? $_GET['mensaje'] : "";
-echo " " . urldecode($mensaje_sesion) . " ";
+// echo " " . rawurldecode($mensaje_sesion) . " ";
+echo  '<h1> '.$mensaje_sesion.' </h1>';
+
+$decrypted = openssl_decrypt($mensaje_sesion, $metodo, $clave, 0, $iv);
+// echo " " . $decrypted . " ";
+
+echo  '<h1> Mensaje desencriptado: '.$decrypted.' </h1>';
+
+
+
+// $plaintext = "Jonnathan Alexander Urquilla Munoz";
+// $clave = "71287345";
+// $metodo = "aes-256-cbc"; // Método de cifrado
+// $iv = random_bytes(16);  // Vector de inicialización (IV) aleatorio
+
+// $encrypted = openssl_encrypt($plaintext, $metodo, $clave, 0, $iv);
+// echo $encrypted;
 
 require_once('Vista/00-utilidades/preloader.php');
 ?>
@@ -48,7 +68,7 @@ require_once('Vista/00-utilidades/preloader.php');
                             </div>
                             <h4 class="card-title mt-2 text-center">BIENVENIDO</h4>
                             <br><br>
-                            <form name="login" method="POST" action="Controlador/Controlador.Sesion.php">
+                            <form name="login" method="POST" action="Controlador/ctr.login.php">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="bi bi-envelope-at-fill"></i></span>
