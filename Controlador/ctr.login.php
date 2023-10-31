@@ -12,17 +12,17 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
     $usuario = new Usuario;
     $usuario->obtenerContra($email);
     $hashPassword = $usuario->getPasswordUsuario();
+
     if ($usuario->getPasswordUsuario() == false) {
-        $mensaje = "<script>alert('ERROR. No se encontro el usuario')</script>";
-        
-        $MensajeEncriptado = encriptar($mensaje);
-        header('Location: ../index.php?mensaje=' . $MensajeEncriptado);
+        $aes_private = encriptar("<script>alert('No se encontro el usuario')</script>");
+        // $aes_private = encriptar("waza");
+        header('Location: ../index.php?message=' . $aes_private);
         exit;
     } else {
         // if(password_verify($password, $hashPassword)){
         if ($password == $password) {
             $usuario->inicioSesion($email, $password);
-
+            
             $_SESSION['Id_Usuario'] = $usuario->getIdUsuario();
             $_SESSION['Usuario_Usuario'] = $usuario->getUsuarioUsuario();
             $_SESSION['Nombre_Usuario'] = $usuario->getNombreUsuario();

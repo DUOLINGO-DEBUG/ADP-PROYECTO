@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ES">
 
+
 <head>
     <title>BIENVENIDOS</title>
     <meta charset="utf-8">
@@ -12,42 +13,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php
-//Mensaje
-
-$plaintext = "Jonnathan Alexander Urquilla Munoz";
-$clave = "71287345";
-$metodo = "aes-256-cbc"; // Método de cifrado
-$iv = random_bytes(16);
-
-$mensaje_sesion = isset($_GET['mensaje']) ? $_GET['mensaje'] : "";
-// echo " " . rawurldecode($mensaje_sesion) . " ";
-echo  '<h1> '.$mensaje_sesion.' </h1>';
-
-$decrypted = openssl_decrypt($mensaje_sesion, $metodo, $clave, 0, $iv);
-// echo " " . $decrypted . " ";
-
-echo  '<h1> Mensaje desencriptado: '.$decrypted.' </h1>';
-
-
-
-// $plaintext = "Jonnathan Alexander Urquilla Munoz";
-// $clave = "71287345";
-// $metodo = "aes-256-cbc"; // Método de cifrado
-// $iv = random_bytes(16);  // Vector de inicialización (IV) aleatorio
-
-// $encrypted = openssl_encrypt($plaintext, $metodo, $clave, 0, $iv);
-// echo $encrypted;
-
 require_once('Vista/00-utilidades/preloader.php');
+require_once('Controlador/ctr.encriptacion.php');
+
+$mensaje_sesion = isset($_GET['message']) ? $_GET['message'] : "";
+if (!empty($mensaje_sesion)) {
+    $aes_private = desencriptarURL($mensaje_sesion);
+    // $aes_private = '698L3Mmy6GFQgkmQJcCZ+Q==';
+    $aes_public = desencriptar($aes_private);
+    // echo '<h1>'. $aes_private .'</h1>';
+    echo $aes_public;
+    
+}
+
+
 ?>
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="img/logo_1_00001.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            PROYECTO ADP
+            PROYECTO ADP <b style="font-size: 10px;">v1.3.4</b>
         </a>
-        <button class="btn btn_zacamil" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
-            Soporte</button>
+        <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
+        Soporte técnico.</button>
     </div>
 </nav>
 
@@ -128,12 +116,12 @@ require_once('Vista/00-utilidades/preloader.php');
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                            <span class="carousel-control-prev-icon" style="background-color: #01274e;" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
+                            <span class="carousel-control-next-icon" style="background-color: #01274e;" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
                         </button>
                     </div>
                 </div>
