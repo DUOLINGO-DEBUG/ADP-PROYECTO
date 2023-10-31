@@ -5,6 +5,14 @@ body {
     background-size: cover;
 }
 
+.text_correo {
+    font-size: 13px;
+}
+
+.text_titulo{
+    font-size: 15px;
+}
+
 .btn_zacamil {
     background-color: #01274e;
     color: white;
@@ -93,7 +101,7 @@ body {
     stroke-dasharray: 48, 144;
     stroke-dashoffset: 192;
     animation: dash_682 1.4s linear infinite;
-    
+
 }
 
 @keyframes dash_682 {
@@ -103,5 +111,19 @@ body {
 
     to {
         stroke-dashoffset: 0;
+    }
+}
+
+/* ------------------------------------RESPONSIVE */
+
+@media (min-width: 992px) {
+    .card_pc {
+        width: 16rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .card_pc {
+        width: 20rem;
     }
 }

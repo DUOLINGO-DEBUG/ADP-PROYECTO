@@ -96,16 +96,15 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                     break;
                             }
                     ?>
-                            <div class="columna m-3">
-                                <div class="card" style="width: 20rem;">
+                            <div class="columna m-2">
+                                <div class="card card_pc">
                                     <i class="bi bi-square-fill" style="position: absolute; top: 0; right: 0; color: <?php echo $color_estado ?>;"></i>
                                     <img src="https://placehold.co/600x300?text=Usuario" class="card-img-top" alt="...">
-                                    <div class="card-body">
+                                    <div class="card-body text_titulo">
                                         <h5 class="card-title"><?php echo $usuario_card['Nombre_Usuario'] ?></h5>
-                                        <p><?php echo $usuario_card['Nombre_Usuario'] . $usuario_card['Apellido_Usuario']; ?></p>
+                                        <p class="text-sm"><?php echo $usuario_card['Nombre_Usuario'] . ' ' . $usuario_card['Apellido_Usuario']; ?></p>
                                     </div>
-                                    <ul class="list-group list-group-flush">
-
+                                    <ul class="list-group list-group-flush text_correo">
                                         <li class="list-group-item"><i class="bi bi-envelope-check"></i><?php echo ' ' . $usuario_card['Usuario_Usuario']; ?></li>
                                         <li class="list-group-item"><i class="bi bi-envelope-at-fill"></i><?php echo ' ' . $usuario_card['Correo_Usuario']; ?></li>
                                         <li class="list-group-item"><i class="bi bi-telephone-fill"></i><?php echo '+503 ' . $usuario_card['Telefono_Usuario']; ?></li>
@@ -116,12 +115,12 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="d-grid gap-2">
-                                                        <button type="button" class="btn btn-outline-success btn-block btn-sm"><i class="bi bi-lock-fill"></i> Activar</button>
+                                                        <button type="button" class="btn btn_zacamil btn-block btn-sm"><i class="bi bi-lock-fill"></i><br> Activar</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="d-grid gap-2">
-                                                        <button type="button" class="btn btn-outline-danger btn-block btn-sm"><i class="bi bi-lock-fill"></i> Desactivar</button>
+                                                        <button type="button" class="btn btn_zacamil btn-block btn-sm"><i class="bi bi-lock-fill"></i><br> Desactivar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,12 +128,16 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                             <div class="row my-2">
                                                 <div class="col-md-6">
                                                     <div class="d-grid gap-2">
-                                                        <button type="button" class="btn btn-outline-warning btn-block btn-sm"><i class="bi bi-lock-fill"></i> Recuperar</button>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" id="switch">
+                                                            <label class="form-check-label" for="switch">Activado</label>
+                                                        </div>
+                                                        <!-- <button type="button" class="btn btn_zacamil btn-block btn-sm"><i class="bi bi-lock-fill"></i><br> Recuperar</button> -->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="d-grid gap-2">
-                                                        <button type="button" class="btn btn-outline-primary btn-block btn-sm"><i class="bi bi-lock-fill"></i> Aprobar</button>
+                                                        <button type="button" class="btn btn_zacamil btn-block btn-sm"><i class="bi bi-lock-fill"></i><br> Aprobar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,7 +343,6 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
         });
 
         //GRAFICO REPORTES ACEPTADO
-        
     </script>
 </body>
 
