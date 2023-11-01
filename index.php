@@ -1,43 +1,39 @@
 <!doctype html>
-<html lang="ES">
-
+<html lang="es">
 
 <head>
-    <title>BIENVENIDOS</title>
+    <title>ZACAMIL</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
-
+    <!-- ----------------------------------------------------------------------------------------------CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
+    <!-- ----------------------------------------------------------------------------------------------JS -->
+    <script src="js/animacion.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/Jquery/jquery-3.7.1.min.js"></script>
+    <script src="js/sweetalert2/sweetalert2.all.min.js"></script>
+
+
 </head>
 
 <?php
+// ----------------------------------------------PHP+
 require_once('Vista/00-utilidades/preloader.php');
 require_once('Controlador/ctr.encriptacion.php');
 
-$mensaje_sesion = isset($_GET['message']) ? $_GET['message'] : "";
-if (!empty($mensaje_sesion)) {
-    $aes_private = desencriptarURL($mensaje_sesion);
-    // $aes_private = '698L3Mmy6GFQgkmQJcCZ+Q==';
-    $aes_public = desencriptar($aes_private);
-    // echo '<h1>'. $aes_private .'</h1>';
-    echo $aes_public;
-    
-}
-
-
+// ----------------------------------------------[]+
 ?>
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="img/logo_1_00001.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            PROYECTO ADP <b style="font-size: 10px;">v1.3.4</b>
+            PROYECTO-ADP <b style="font-size: 10px;">v1.3.4</b>
         </a>
         <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
-        Soporte.</button>
+            Soporte.</button>
     </div>
 </nav>
 
@@ -76,8 +72,8 @@ if (!empty($mensaje_sesion)) {
 
                                 <br>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="submit" class="btn btn-primary">Iniciar sección</button>
-                                    <!-- <button type="button" class="btn btn-primary">Registrar</button> -->
+                                    <button type="submit" class="btn btn_zacamil btn-sm"><i class="bi bi-box-arrow-right"></i> Iniciar sección</button>
+                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrar <i class="bi bi-box-arrow-in-up-right"></i></button>
                                 </div>
                                 </br>
 
@@ -127,21 +123,71 @@ if (!empty($mensaje_sesion)) {
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/animacion.js"></script>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">REGISTRO</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="bi bi-check2-circle"></i> Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        document.getElementById('downloadButton').addEventListener('click', function() {
-            // Realizar una solicitud HTTP al script PHP para descargar el archivo
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'descargar.php', true);
-            xhr.send();
-        });
-    </script>
+    <?php
+    $mensaje_sesion = isset($_GET['message']) ? $_GET['message'] : "";
+    if (!empty($mensaje_sesion)) {
+        $aes_private = desencriptarURL($mensaje_sesion);
+        // $aes_private = '698L3Mmy6GFQgkmQJcCZ+Q==';
+        $aes_public = desencriptar($aes_private);
+        // echo '<h1>'. $aes_private .'</h1>';
+        // echo $aes_public;
+        $titulo_alert = 'Zacamil';
+        $text_alert = 'Zacamil que mas se puede decir';
+        $icono_alert = 'info';
+        $btntxt_alert = 'Aceptar';
+        $btncolor_alert = '#01274e';
+
+        switch ($aes_public) {
+            case 1:
+                $titulo_alert = '¡Cuenta no encontrada!';
+                $text_alert = 'Si no tiene cuenta puede crear una o verifique sus credenciales y que el correo tenga el siguiente formato: --------@zacamil.sv';
+                $icono_alert = 'error';
+                $btntxt_alert = 'Aceptar';
+                $btncolor_alert = '#01274e';
+                break;
+            case 2:
+                
+                break;
+        }
+    ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: '<?php echo $titulo_alert ?>',
+                    text: '<?php echo $text_alert ?>',
+                    icon: '<?php echo $icono_alert ?>',
+                    confirmButtonText: '<?php echo $btntxt_alert ?>', // Cambia el texto del botón de confirmación
+                    confirmButtonColor: '<?php echo $btncolor_alert ?>', // Cambia el color de fondo del botón de confirmación
+                });
+            });
+        </script>
+
+    <?php
+    }
+    ?>
 </body>
 
 </html>

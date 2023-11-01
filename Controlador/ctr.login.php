@@ -14,7 +14,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
     $hashPassword = $usuario->getPasswordUsuario();
 
     if ($usuario->getPasswordUsuario() == false) {
-        $aes_private = encriptar("<script>alert('No se encontro el usuario')</script>");
+        $aes_private = encriptar("1");
         // $aes_private = encriptar("waza");
         header('Location: ../index.php?message=' . $aes_private);
         exit;
