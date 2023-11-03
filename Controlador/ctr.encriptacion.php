@@ -1,7 +1,5 @@
 <?php
-
 $clave = 'UM201481';
-
 function encriptar($dato)
 {
     global $clave;

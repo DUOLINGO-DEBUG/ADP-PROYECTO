@@ -9,7 +9,7 @@ body {
     font-size: 13px;
 }
 
-.text_titulo{
+.text_titulo {
     font-size: 15px;
 }
 
@@ -26,6 +26,28 @@ body {
 
 .color_zacamil {
     color: #01274e;
+}
+
+.icon_zacamil {
+    background-color: #01274e;
+    color: white;
+    pointer-events: none;
+}
+
+.icon_zacamil_red {
+    background-color: #dc2e2e;
+    color: white;
+    pointer-events: none;
+}
+
+.icon_zacamil-red {
+    background-color: #01274e;
+    color: white;
+    pointer-events: none;
+}
+
+.importante_zacamil {
+    color: #f27474;
 }
 
 .carouselbtn_zacamil {

@@ -10,6 +10,7 @@ class Usuario
     private $correo_usuario;
     private $telefono_usuario;
     private $password_usuario;
+    private $fecha_creacion;
     private $estado_estados;
     private $bp_usuario;
     private $cargo_cargos;
@@ -93,6 +94,18 @@ class Usuario
         $this->password_usuario = $password_usuario;
     }
 
+    //Nuevo getter y setter para fecha
+    public function getFechaCreacion()
+    {
+        return $this->fecha_creacion;
+    }
+
+    public function setFechaCreacion($fecha_creacion)
+    {
+        $this->fecha_creacion = $fecha_creacion;
+    }
+
+    // private $fecha_creacion;
     // Getter y setter para estado_estados
     public function getEstadoEstados()
     {
@@ -124,6 +137,39 @@ class Usuario
     public function setCargoCargos($cargo_cargos)
     {
         $this->cargo_cargos = $cargo_cargos;
+    }
+
+
+    public function registrar_usuario()
+    {
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare(
+                "INSERT INTO usuarios (Nombre_Usuario,Apellido_Usuario,Correo_Usuario,Usuario_Usuario,Telefono_Usuario,Password_Usuario,Fecha_Creacion_Usuario,Estado_Estados,Bloqueo_Temporal_Usuario,Cargo_Cargos) 
+                VALUES (?,?,?,?,?,?,?,?,?,?)"
+            );
+            
+            $stmt->bindParam(1, $this->nombre_usuario);
+            $stmt->bindParam(2, $this->apellido_usuario);
+            $stmt->bindParam(3, $this->correo_usuario);
+            $stmt->bindParam(4, $this->usuario_usuario);
+            $stmt->bindParam(5, $this->telefono_usuario);
+            $stmt->bindParam(6, $this->password_usuario);
+            $stmt->bindParam(7, $this->fecha_creacion);
+            $stmt->bindParam(8, $this->estado_estados);
+            $stmt->bindParam(9, $this->bp_usuario);
+            $stmt->bindParam(10, $this->cargo_cargos);
+            // $consulta = var_export($stmt, true);
+            // echo 'Fukcyou' . $consulta;
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
     }
 
     public function obtenerContra($email)
@@ -180,7 +226,8 @@ class Usuario
         }
     }
 
-    public function Listar_Usuarios(){
+    public function Listar_Usuarios()
+    {
         //require("conexion.class.php");
         $conn = new Conexion;
         $pdo = $conn->connect();

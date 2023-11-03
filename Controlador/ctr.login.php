@@ -20,9 +20,9 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
         exit;
     } else {
         // if(password_verify($password, $hashPassword)){
-        if ($password == $password) {
+        if (password_verify($password, $hashPassword)) {
             $usuario->inicioSesion($email, $password);
-            
+
             $_SESSION['Id_Usuario'] = $usuario->getIdUsuario();
             $_SESSION['Usuario_Usuario'] = $usuario->getUsuarioUsuario();
             $_SESSION['Nombre_Usuario'] = $usuario->getNombreUsuario();

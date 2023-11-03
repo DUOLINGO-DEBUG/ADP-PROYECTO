@@ -3,7 +3,7 @@ Class Conexion{
     private $host = "localhost";
     private $user = "root";
     private $pass = "";
-    private $db = "adp_zacamil";
+    private $db = "bdd_zacamil";
 
     public function connect() {
         try {
