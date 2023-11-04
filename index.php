@@ -239,7 +239,7 @@ require_once('Controlador/ctr.encriptacion.php');
         $icono_color = '';
         $html = '';
 
-
+        // $aes_public = 5;
         switch ($aes_public) {
             case 1:
                 $titulo_alert = '¡Cuenta no encontrada!';

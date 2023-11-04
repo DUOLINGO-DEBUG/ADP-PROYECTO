@@ -30,6 +30,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
             $_SESSION['Correo_Usuario'] = $usuario->getCorreoUsuario();
             $_SESSION['Telefono_Usuario'] = $usuario->getTelefonoUsuario();
             $_SESSION['Password_Usuario'] = $usuario->getPasswordUsuario();
+            $_SESSION['Fecha_Creacion_Usuario'] = $usuario->getFechaCreacion(); 
             $_SESSION['Estado_Estados'] = $usuario->getEstadoEstados();
             $_SESSION['BP_Usuario'] = $usuario->getBpUsuario();
             $_SESSION['Cargo_Cargos'] = $usuario->getCargoCargos();
@@ -42,10 +43,9 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
                 header('Location: ../Vista/03-Administrador/index.php');
             }
         } else {
-            $mensaje = "<script>alert('ERROR. Contraseña incorrecta)</script>";
-            $mensaje_codificado = urlencode($mensaje);
-            echo "<script>alert('Else ultimo')</script>";
-            header('Location: ../index.php?mensaje=' . $mensaje_codificado);
+            $aes_private = encriptar("2");
+            // $aes_private = encriptar("waza");
+            header('Location: ../index.php?message=' . $aes_private);
             exit;
             //sleep(3);
         }

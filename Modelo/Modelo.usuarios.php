@@ -139,7 +139,6 @@ class Usuario
         $this->cargo_cargos = $cargo_cargos;
     }
 
-
     public function registrar_usuario()
     {
         $conn = new Conexion;
@@ -149,7 +148,7 @@ class Usuario
                 "INSERT INTO usuarios (Nombre_Usuario,Apellido_Usuario,Correo_Usuario,Usuario_Usuario,Telefono_Usuario,Password_Usuario,Fecha_Creacion_Usuario,Estado_Estados,Bloqueo_Temporal_Usuario,Cargo_Cargos) 
                 VALUES (?,?,?,?,?,?,?,?,?,?)"
             );
-            
+
             $stmt->bindParam(1, $this->nombre_usuario);
             $stmt->bindParam(2, $this->apellido_usuario);
             $stmt->bindParam(3, $this->correo_usuario);
@@ -215,6 +214,7 @@ class Usuario
                 $this->correo_usuario = $usuario['Correo_Usuario'];
                 $this->telefono_usuario = $usuario['Telefono_Usuario'];
                 $this->password_usuario = $usuario['Password_Usuario'];
+                $this->fecha_creacion = $usuario['Fecha_Creacion_Usuario'];
                 $this->estado_estados = $usuario['Estado_Estados'];
                 $this->bp_usuario = $usuario['BP_Usuario'];
                 $this->cargo_cargos = $usuario['Cargo_Cargos'];
@@ -236,6 +236,24 @@ class Usuario
             $stmt->execute();
             $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $usuarios;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    public function Modificar_Usuarios($cargo, $id_usuario)
+    {
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("UPDATE `usuarios` SET `Estado_Estados` = ? WHERE `usuarios`.`Id_Usuario` = ?");
+            $stmt->bindParam(1, $cargo);
+            $stmt->bindParam(2, $id_usuario);
+            $stmt->execute();
+            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return true;
         } catch (PDOException $e) {
             echo "Error de conexión: " . $e->getMessage();
         } finally {

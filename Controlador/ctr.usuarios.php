@@ -59,9 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroUsuario'])) {
         if ($registro_usuario == true) {
             $aes_private01 = encriptar("5");
             $aes_private02 = encriptar($cuenta_usuario->getUsuarioUsuario());
-            header('Location: ../index.php?message='.$aes_private01.'&usuario='.$aes_private02);
+            header('Location: ../index.php?message=' . $aes_private01 . '&usuario=' . $aes_private02);
             exit;
-
         } else {
             echo $registro_usuario;
             $aes_private = encriptar("4");
@@ -73,6 +72,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroUsuario'])) {
         header('Location: ../index.php?message=' . $aes_private);
         exit;
     }
+}
+
+if (isset($_POST['userId']) && isset($_POST['customData']) && isset($_POST['admin'])) {
+    $userId = desencriptar($_POST['userId']);
+    $customData = desencriptar($_POST['customData']);
+    $admin_id = desencriptar($_POST['admin']);
+
+    $cuenta_usuario = new Usuario;
+    $mensaje = '';
+    switch ($customData) {
+        case 101:
+            $cuenado_modificada = $cuenta_usuario->Modificar_Usuarios(1, $userId);
+            $mensaje = 'Cuenta activada';
+            break;
+        case 102:
+            $cuenta_usuario->Modificar_Usuarios(2, $userId);
+            break;
+        case 103:
+            $cuenta_usuario->Modificar_Usuarios(3, $userId);
+            break;
+        case 104:
+            $cuenta_usuario->Modificar_Usuarios(4, $userId);
+            break;
+        default:
+
+            break;
+    }
+
+    if($cuenado_modificada){
+        echo "Mensaje ==>" . $mensaje;
+    }
+    else{
+        echo "[+] error base de datos";
+    }
+    
 }
 
 // echo 'waza';
