@@ -5,6 +5,13 @@ body {
     background-size: cover;
 }
 
+.background_zacamil{
+    background-color: #01274e;
+    background-image: url(../img/Fondo_Puntos_e.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .text_correo {
     font-size: 13px;
 }

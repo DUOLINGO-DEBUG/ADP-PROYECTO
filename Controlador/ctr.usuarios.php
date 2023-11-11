@@ -81,32 +81,53 @@ if (isset($_POST['userId']) && isset($_POST['customData']) && isset($_POST['admi
 
     $cuenta_usuario = new Usuario;
     $mensaje = '';
+    $tiempo_usuario = Obtner_Fecha_sv() . ' ' . Obtener_Hora_sv();
+
     switch ($customData) {
         case 101:
+            $accion_user = 1;
             $cuenado_modificada = $cuenta_usuario->Modificar_Usuarios(1, $userId);
+            // $registro_Admin = $correo_usuario->Registro_usuarios($userId, $admin_id, 1, $tiempo_usuario);
+            $registro_Admin = $cuenta_usuario->Registro_Usuarios_Admin($userId, $admin_id, 1, $tiempo_usuario);
             $mensaje = 'Cuenta activada';
             break;
         case 102:
-            $cuenta_usuario->Modificar_Usuarios(2, $userId);
+            $accion_user = 2;
+            $cuenado_modificada = $cuenta_usuario->Modificar_Usuarios(2, $userId);
+            $registro_Admin = $cuenta_usuario->Registro_Usuarios_Admin($userId, $admin_id, 2, $tiempo_usuario);
+            $mensaje = 'Cuenta desactivada';
+
             break;
         case 103:
-            $cuenta_usuario->Modificar_Usuarios(3, $userId);
+            $accion_user = 3;
+            $cuenado_modificada = $cuenta_usuario->Modificar_Usuarios(3, $userId);
+            $registro_Admin = $cuenta_usuario->Registro_Usuarios_Admin($userId, $admin_id, 3, $tiempo_usuario);
+            $mensaje = 'Cuenta en recuperación';
+
             break;
         case 104:
-            $cuenta_usuario->Modificar_Usuarios(4, $userId);
+            $accion_user = 4;
+            $cuenado_modificada = $cuenta_usuario->Modificar_Usuarios(4, $userId);
+            $registro_Admin = $cuenta_usuario->Registro_Usuarios_Admin($userId, $admin_id, 4, $tiempo_usuario);
+            $mensaje = 'Cuenta nueva';
             break;
         default:
-
             break;
     }
 
-    if($cuenado_modificada){
+    if ($cuenado_modificada) {
         echo "Mensaje ==>" . $mensaje;
-    }
-    else{
+
+        // $response = array(
+        //     'accion' => $accion_user
+        // );
+
+        // var_dump($array);
+        // header('Content-Type: application/json');
+        // echo json_encode($response);
+    } else {
         echo "[+] error base de datos";
     }
-    
 }
 
 // echo 'waza';

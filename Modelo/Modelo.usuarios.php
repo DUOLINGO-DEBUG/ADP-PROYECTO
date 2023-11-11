@@ -232,7 +232,7 @@ class Usuario
         $conn = new Conexion;
         $pdo = $conn->connect();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuarios.Cargo_Cargos = 1 OR usuarios.Cargo_Cargos = 2;");
+            $stmt = $pdo->prepare("SELECT * FROM usuarios");
             $stmt->execute();
             $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $usuarios;
@@ -243,6 +243,57 @@ class Usuario
         }
     }
 
+    public function Listar_Tecnicos(){
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuarios.Estado_Estados = 1 OR usuarios.Cargo_Cargos = 2;");
+            $stmt->execute();
+            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $usuarios;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    public function Listar_Usuarios_Totales()
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("SELECT Cargo_Cargos AS ROl, COUNT(*) AS cantidad_de_usuarios FROM usuarios GROUP BY ROl ORDER BY ROl;");
+            $stmt->execute();
+            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $usuarios;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    public function Listar_Tecnicos_Random()
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuarios.Cargo_Cargos = 2 AND usuarios.Estado_Estados = 1 ORDER BY RAND();");
+            $stmt->execute();
+            $tecnicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $tecnicos;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    //SELECT * FROM usuarios WHERE usuarios.Cargo_Cargos = 2 ORDER BY RAND();
+
     public function Modificar_Usuarios($cargo, $id_usuario)
     {
         $conn = new Conexion;
@@ -251,6 +302,25 @@ class Usuario
             $stmt = $pdo->prepare("UPDATE `usuarios` SET `Estado_Estados` = ? WHERE `usuarios`.`Id_Usuario` = ?");
             $stmt->bindParam(1, $cargo);
             $stmt->bindParam(2, $id_usuario);
+            $stmt->execute();
+            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return true;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    public function Registro_Usuarios_Admin($id_usuario, $id_admin, $cargo, $FechaHora_Actual){
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("INSERT INTO `registros` (`Usuario_Registro`, `Admin_Registro`, `Estado_Registro`, `Fecha_Registro`) VALUES (?, ?, ?, ?);");
+            $stmt->bindParam(1, $id_usuario);
+            $stmt->bindParam(2, $id_admin);
+            $stmt->bindParam(3, $cargo);
+            $stmt->bindParam(4, $FechaHora_Actual);
             $stmt->execute();
             $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return true;

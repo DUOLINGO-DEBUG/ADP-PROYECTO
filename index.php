@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="es">
 
+<?php
+$ip = file_get_contents('https://api.ipify.org');
+?>
+
 <head>
     <title>ZACAMIL</title>
     <meta charset="utf-8">
@@ -32,8 +36,11 @@ require_once('Controlador/ctr.encriptacion.php');
             <img src="img/logo_1_00001.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             PROYECTO-ADP <b style="font-size: 10px;">v1.3.4</b>
         </a>
-        <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
-            Soporte.</button>
+        <div>
+            <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
+                Soporte.</button>
+            <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-geo-alt-fill"></i></span> <?php echo $ip ?></button>
+        </div>
     </div>
 </nav>
 
@@ -351,8 +358,8 @@ function plantilla_cuenta_activada($correo)
     return $plantilla;
 }
 
-function plantilla_cuenta_recuperacion(){
-
+function plantilla_cuenta_recuperacion()
+{
 }
 ?>
 
