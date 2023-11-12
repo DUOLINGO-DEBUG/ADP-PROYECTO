@@ -114,4 +114,23 @@ class Asignaciones{
             $pdo = null; 
         }
     }
+
+    public function Listar_Asignaciones_tecnico($id_tecnico)
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM asignaciones INNER JOIN reportes ON asignaciones.Reporte_Reportes = reportes.Id_Reporte WHERE asignaciones.Tecnico_Usuarios = ?");
+            $stmt->bindParam(1, $id_tecnico);
+            $stmt->execute();
+            $asignaciones_tec = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $asignaciones_tec;
+
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; 
+        }
+    }
 }

@@ -31,7 +31,9 @@ function estadisticas_mes($mes, $opcion)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroOferta'])) {
-    
+
+    // JefeArea
+    $JefeArea = isset($_POST['JefeArea']) ? $_POST['JefeArea'] : "";
 
     $tipo_form = isset($_POST['tipo_form']) ? $_POST['tipo_form'] : "";
     $id_usuario_Admin = desencriptar(desencriptarURL(isset($_POST['id_usuario_Admin']) ? $_POST['id_usuario_Admin'] : ""));
@@ -71,7 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroOferta'])) {
     $reportes_usuario = new Reporte;
 
     if ($tipo_form == 0) {
-        
+
+
         $reportes_usuario->setUsuario_usuario($id_usuario_reporte);
         $reportes_usuario->setnombreEquipo_reporte($nombre_equipo_reporte);
         $reportes_usuario->setmarca_reporte($marca_equipo_reporte);
@@ -88,6 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroOferta'])) {
         $registro_oferta = $reportes_usuario->Registrar_Reportes();
 
         if ($registro_oferta == true) {
+            if ($JefeArea == 1) {
+                $aes_private01 = encriptar("1");
+                header('Location: ../Vista/01-Jefe de area/index.php?message=' . $aes_private01); 
+                // include_once('');
+                exit;
+            }
+
             $aes_private01 = encriptar("1");
             header('Location: ../Vista/03-Administrador/index.php?message=' . $aes_private01);
             // include_once('');
@@ -102,7 +112,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroOferta'])) {
         $registro_ofertas_asignacion = $reportes_usuario->Asignar_reporte($id_usuario_reporte, $id_usuario_Admin, $tecnico_reporte, $tiempo_reporte_c, 3);
         $registro_editar_oferta = $reportes_usuario->editar_oferta($id_usuario_reporte, $anexo_reporte, 3);
 
+        // echo $id_usuario_reporte . '<br>' .
+        //  $id_usuario_Admin . '<br>' . 
+        //  $tecnico_reporte . '<br>' . 
+        //  $tiempo_reporte_c . '<br> [+]' . 
+        //  $id_usuario_reporte . '<br>' . 
+        //  $anexo_reporte . '<br>' ;
+
+
         if (($registro_ofertas_asignacion == true) && ($registro_editar_oferta == true)) {
+            // echo 'Asi es entro al if de 123';
             $aes_private01 = encriptar("1");
             header('Location: ../Vista/03-Administrador/index.php?message=' . $aes_private01);
             // include_once('');
@@ -112,6 +131,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroOferta'])) {
             header('Location: ../Vista/03-Administrador/index.php?message=' . $aes_private01);
             exit;
         }
-        
+    }
+}
+
+$mensaje_sesion = isset($_GET['message']) ? $_GET['message'] : "";
+
+if (!empty($mensaje_sesion)) {
+
+    if ($mensaje_sesion) {
+        $reportes_reportes = new Reporte;
+
+        $id_reporte_denegar = desencriptar(desencriptarURL($mensaje_sesion));
+        $id_denegar =2;
+
+        $registro_editar_oferta = $reportes_reportes->editar_oferta_denegar($id_reporte_denegar, $id_denegar);
+
+        // echo '[+]'.$id_reporte_denegar . '<br>' .
+        //  $id_denegar . '<br>' . 
+        //  'SQL=>'.$registro_editar_oferta . '<br>';
+
+        if ($registro_editar_oferta == true) {
+            // $aes_private01 = encriptar("1");
+            // echo 'entre al if?';
+            header('Location: ../vista/03-Administrador/');
+            exit;
+        } else {
+            echo 'entre al else?';
+            // $aes_private01 = encriptar("2");
+            header('Location: ../vista/03-Administrador/');
+            exit;
+        }
     }
 }

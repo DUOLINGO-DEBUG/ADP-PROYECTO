@@ -184,6 +184,7 @@ class Usuario
 
             if ($stmt->rowCount() == 1) {
                 $this->password_usuario = $usuario['Password_Usuario'];
+                $this->estado_estados = $usuario['Estado_Estados'];
                 return true;
             } else {
                 return false;
@@ -232,7 +233,7 @@ class Usuario
         $conn = new Conexion;
         $pdo = $conn->connect();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM usuarios");
+            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuarios.Cargo_Cargos != 3 ORDER BY usuarios.Estado_Estados DESC;");
             $stmt->execute();
             $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $usuarios;

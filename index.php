@@ -101,7 +101,7 @@ require_once('Controlador/ctr.encriptacion.php');
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5 class="color_zacamil">Manuales ADP</h5>
                                     <!-- <a href="#" class="btn btn-dark">WAZA</a> -->
-                                    <button class="btn_Zacamil" id="downloadButton">Click pls</button>
+                                    <!-- <button class="btn_Zacamil" id="downloadButton">Click pls</button> -->
                                     <p class="color_zacamil">No olvides consultar tu manual de usuario.</p>
                                 </div>
                             </div>
@@ -294,7 +294,29 @@ require_once('Controlador/ctr.encriptacion.php');
 
                     // echo '<h1>'.$html.'</h1>';
                 }
+                break;
+            case 6:
+                $titulo_alert = '¡Cuenta no activa!';
+                $text_alert = 'Recuerde que su cuenta sera activda por un administrador.';
+                $icono_alert = 'warning';
+                $btntxt_alert = 'Aceptar';
+                $btncolor_alert = '#01274e';
+                break;
 
+            case 7:
+                $titulo_alert = '¡Cuenta en modo recuperación!';
+                $text_alert = 'Cuenta en modo recuperación.';
+                $icono_alert = 'warning';
+                $btntxt_alert = 'Aceptar';
+                $btncolor_alert = '#01274e';
+                break;
+
+            case 8:
+                $titulo_alert = '¡Cuenta bloqueada!';
+                $text_alert = 'Un administrador bloqueo su cuenta.';
+                $icono_alert = 'error';
+                $btntxt_alert = 'Aceptar';
+                $btncolor_alert = '#01274e';
                 break;
         }
     ?>

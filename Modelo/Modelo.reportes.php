@@ -183,7 +183,7 @@ class Reporte
         //require("conexion.class.php");
         $conn = new Conexion;
         $pdo = $conn->connect();
-        
+
         try {
             $stmt = $pdo->prepare("INSERT INTO `asignaciones`(`Reporte_Reportes`, `Admin_Usuarios`, `Tecnico_Usuarios`, `Fecha_Asignacion`, `Estado_Asignacion`) VALUES (?,?,?,?,?)");
             $stmt->bindParam(1, $id_usuario_reporte);
@@ -206,7 +206,7 @@ class Reporte
         //require("conexion.class.php");
         $conn = new Conexion;
         $pdo = $conn->connect();
-        
+
         try {
             $stmt = $pdo->prepare("UPDATE `reportes` SET `Anexo_Reporte` = ?, `Estado_Reporte` = ? WHERE `reportes`.`Id_Reporte` = ?;");
             $stmt->bindParam(1, $anexo);
@@ -222,6 +222,28 @@ class Reporte
         }
     }
 
+    public function editar_oferta_denegar($id_usuario_reporte, $estado)
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+
+        try {
+
+            $stmt = $pdo->prepare("UPDATE reportes SET `Estado_Reporte` = ? WHERE `reportes`.`Id_Reporte` = ?;");
+            $stmt->bindParam(1, $estado);
+            $stmt->bindParam(2, $id_usuario_reporte);
+            $stmt->execute();
+
+            // return $xd;
+            return true;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+        }
+    }
+
     // 
 
     public function Listar_Reportes()
@@ -230,7 +252,25 @@ class Reporte
         $conn = new Conexion;
         $pdo = $conn->connect();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM reportes INNER JOIN usuarios ON reportes.Usuario_Usuarios = usuarios.Id_Usuario ORDER BY reportes.Id_Reporte DESC;");
+            $stmt = $pdo->prepare("SELECT * FROM reportes INNER JOIN usuarios ON reportes.Usuario_Usuarios = usuarios.Id_Usuario ORDER BY reportes.Estado_Reporte DESC;");
+            $stmt->execute();
+            $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $reportes;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    public function Listar_Reportes_id($id_user)
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM reportes INNER JOIN usuarios ON reportes.Usuario_Usuarios = usuarios.Id_Usuario WHERE reportes.Usuario_Usuarios = ? ORDER BY reportes.Id_Reporte DESC;");
+            $stmt->bindParam(1, $id_user);
             $stmt->execute();
             $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $reportes;

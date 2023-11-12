@@ -95,19 +95,19 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                             <div class="fw-bold">Necesitas información?</div>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-success btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="successBtn"><i class="bi bi-dice-1-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="dangerBtn"><i class="bi bi-dice-2-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-warning btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="warningBtn"><i class="bi bi-dice-3-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-primary btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="primaryBtn"><i class="bi bi-dice-4-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#registroactividad" aria-controls="registroactividad"><i class="bi bi-dice-5-fill"></i> Presióname</button>
                                     </div>
                                     <!-- <div class="col">
@@ -233,8 +233,9 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
 
                 <div class="principal">
                     <?php
+                    $numero_arreglo_usuarios = 0;
                     if (is_array($usuarios)) {
-                        // echo count($usuarios);
+                        $numero_arreglo_usuarios = count($usuarios);
                         // var_dump($usuarios);
                         foreach ($usuarios as $usuario_card) {
                             $rol = '';
@@ -455,11 +456,24 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                     </div>
                                 </div>
                             </div>
-                        <?php
+                    <?php
                         }
-                    } else { ?>
-                        <p>NO SE HAN REGISTRADO EMPLEADOS</p>
-                    <?php } ?>
+                    }
+                    ?>
+
+                    <?php
+                    if ($numero_arreglo_usuarios == 0) {
+                    ?>
+                        <div class="columna">
+                            <div class=" container-fluid h-100 d-flex align-items-center justify-content-center">
+                                <div class="text-center">
+                                    <h6><span><i class="bi bi-box-seam-fill"></i></span> ¿Tú empleados desaparecieron?, cuando haya empleados registrados aparecerán aquí.</h6>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
 
                 </div>
             </div>
@@ -473,16 +487,16 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                             <div class="fw-bold">Necesitas información?</div>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-success btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="successBtnreport"><i class="bi bi-dice-1-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="dangerBtnreport"><i class="bi bi-dice-2-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-warning btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="warningBtnreport"><i class="bi bi-dice-3-fill"></i> Presióname</button>
                                     </div>
-                                    <div class="col">
+                                    <div class="col mt-1">
                                         <button class="btn btn-primary btn-sm" data-bs-toggle="toast" data-bs-autohide="true" id="primaryBtnreport"><i class="bi bi-dice-4-fill"></i> Presióname</button>
                                     </div>
                                 </div>
@@ -815,45 +829,51 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                                 </div>
                                                 <hr>
                                                 <div class="text-center">
-                                                    <h4>Asigna miento de reporte a técnico</h4>
+                                                    <h5><i class="bi bi-send-plus-fill"></i> Asigna miento de reporte a técnico</h5>
                                                 </div>
-
+                                                <hr>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text icon_zacamil"><i class="bi bi-body-text"></i></span>
                                                     <div class="form-floating">
-                                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="anexo_reporte"><?php echo $reportes_card['Anexo_Reporte']; ?></textarea>
+                                                        <textarea required class="form-control" placeholder="Leave a comment here" id="anexo_id" name="anexo_reporte"><?php echo $reportes_card['Anexo_Reporte']; ?></textarea>
                                                         <label for="floatingTextarea">Anexo.</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text icon_zacamil"><i class="bi bi-person-lines-fill"></i></span>
-                                                    <div class="form-floating">
-                                                        <select class="form-select" id="floatingSelectDisabled" name="rol" aria-label="Floating label" required="">
-                                                            <?php
-                                                            // $usuarios_totales = $usuario->Listar_Usuarios_Totales();
-                                                            if (is_array($tecnicos)) {
-                                                                foreach ($tecnicos as $tecnicosSelectd) {
-                                                            ?>
-                                                                    <option value="<?php echo encriptar($tecnicosSelectd['Id_Usuario']); ?>"><?php echo $tecnicosSelectd['Usuario_Usuario']; ?></option>
-                                                            <?php
+                                                <?php
+                                                if ($reportes_card['Estado_Reporte'] != 2) {
+                                                ?>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text icon_zacamil"><i class="bi bi-person-lines-fill"></i></span>
+                                                        <div class="form-floating">
+                                                            <select class="form-select" id="floatingSelectDisabled" name="rol" aria-label="Floating label" required="">
+                                                                <?php
+                                                                // $usuarios_totales = $usuario->Listar_Usuarios_Totales();
+                                                                if (is_array($tecnicos)) {
+                                                                    foreach ($tecnicos as $tecnicosSelectd) {
+                                                                ?>
+                                                                        <option value="<?php echo encriptar($tecnicosSelectd['Id_Usuario']); ?>"><?php echo $tecnicosSelectd['Usuario_Usuario']; ?></option>
+                                                                <?php
 
+                                                                    }
                                                                 }
-                                                            }
-                                                            ?>
+                                                                ?>
 
-                                                        </select>
-                                                        <label for="floatingSelectDisabled">Seleccionar Ténico.</label>
+                                                            </select>
+                                                            <label for="floatingSelectDisabled">Seleccionar Ténico.</label>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                <?php
+                                                }
+                                                ?>
 
                                             </div>
                                             <?php
-                                            if ($reportes_card['Anexo_Reporte'] === null) {
+                                            if ($reportes_card['Estado_Reporte'] != 2) {
                                             ?>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
-                                                    <a id="btnregistrar" href="" class="btn btn-danger btn-sm"><i class="bi bi-x-circle"></i> Rechazar</a>
+                                                    <a id="btnRechazo" href="../../Controlador/ctr.ofertas.php?message=<?php echo encriptar($reportes_card['Id_Reporte']);?>" class="btn btn-danger btn-sm"><i class="bi bi-x-circle"></i> Rechazar</a>
                                                     <button type="submit" id="btnregistrar" name="RegistroOferta" class="btn btn-warning btn-sm"><i class="bi bi-check2-circle"></i> Asignar</button>
                                                 </div>
                                             <?php
@@ -873,7 +893,13 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                         }
                     }
                     if ($numero_arreglo == 0) { ?>
-                        <h1>NO SE HAN REGISTRADO REPORTES</h1>
+                        <div class="columna">
+                            <div class=" container-fluid h-100 d-flex align-items-center justify-content-center">
+                                <div class="text-center">
+                                    <h6><span><i class="bi bi-box-seam-fill"></i></span> Bueno, Tal parece que no hay reportes…, Esperar a que registren o registrar uno tú mismo.</h6>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
 
                 </div>
@@ -909,7 +935,10 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                                 <tbody>
                                                     <?php
                                                     // $usuarios_totales = $usuario->Listar_Usuarios_Totales();
+                                                    $total_roles;
                                                     if (is_array($usuarios_totales)) {
+                                                        $total_roles = count($usuarios);
+                                                        // $roles = 0;
                                                         foreach ($usuarios_totales as $usuarios_totales_individual) {
                                                             $rol = '';
                                                             switch ($usuarios_totales_individual['ROl']) {
@@ -922,15 +951,34 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                                                                 case 3:
                                                                     $rol = 'Administrador';
                                                                     break;
+                                                                default:
+                                                                    $rol = 'Otros Usuarios';
+                                                                    break;
                                                             }
                                                     ?>
                                                             <tr>
+
                                                                 <td><?php echo $rol ?></td>
                                                                 <td><?php echo $usuarios_totales_individual['cantidad_de_usuarios']; ?></td>
                                                             </tr>
-                                                    <?php
-
+                                                        <?php
+                                                            // $roles++;
                                                         }
+                                                    } else {
+                                                        ?>
+                                                        <tr>
+                                                            <td>Técnico</td>
+                                                            <td>No existen!</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jefe de Área</td>
+                                                            <td>No existen!</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Administrador</td>
+                                                            <td>No existen!</td>
+                                                        </tr>
+                                                    <?php
                                                     }
                                                     ?>
                                                 </tbody>
@@ -976,7 +1024,25 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
     // echo var_dump($reporte_F);
     ?>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script>
+        // Obtén referencias a los elementos
+        // var textarea = document.getElementById('anexo_id');
+        // var enlace = document.getElementById('btnRechazo');
+
+        // // Agrega un event listener al enlace para verificar el textarea antes de seguir el enlace
+        // enlace.addEventListener('click', function(event) {
+        //     // Verifica si el textarea cumple con la condición required
+        //     if (textarea.checkValidity()) {
+        //         // Si cumple, permite seguir el enlace
+        //         alert('Textarea cumple con la condición required. ¡Puedes seguir el enlace!');
+        //     } else {
+        //         // Si no cumple, evita seguir el enlace
+        //         alert('Textarea no cumple con la condición required. ¡Completa el textarea antes de seguir el enlace!');
+        //         event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+        //     }
+        // });
+    </script>
+
     <script>
         <?php
         $dia_reporte = date('d');
@@ -1163,11 +1229,16 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
             labels: ['Jefe A.', 'Técni', 'Admin'],
             datasets: [{
                 data: [<?php if (is_array($usuarios_totales)) {
+
                             foreach ($usuarios_totales as $usuarios_totales_individual) {
-                                echo $usuarios_totales_individual['cantidad_de_usuarios'] . ',';
+
+                                if ($usuarios_totales_individual['cantidad_de_usuarios'] == 0) {
+                                    echo '0.5,';
+                                } else {
+                                    echo $usuarios_totales_individual['cantidad_de_usuarios'] . ',';
+                                }
                             }
                         } else {
-                            echo '0,';
                         }
                         ?>],
                 backgroundColor: ['#190482', '#176B87', '#4F709C'],
