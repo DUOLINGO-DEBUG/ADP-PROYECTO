@@ -11,9 +11,9 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
     // sleep(10);
     $usuario = new Usuario;
     $usuario->obtenerContra($email);
-
     $hashPassword = $usuario->getPasswordUsuario();
 
+    
     if ($usuario->getEstadoEstados() == 1) {
 
         if ($usuario->getPasswordUsuario() == false) {

@@ -7,6 +7,7 @@ $ip = file_get_contents('https://api.ipify.org');
 
 <head>
     <title>ZACAMIL</title>
+    <link rel="icon" href="img/logo_1_000010.svg" type="image/x-icon" sizes="16x16 32x32 48x48">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- ----------------------------------------------------------------------------------------------CSS -->
@@ -37,8 +38,8 @@ require_once('Controlador/ctr.encriptacion.php');
             PROYECTO-ADP <b style="font-size: 10px;">v1.3.4</b>
         </a>
         <div>
-            <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
-                Soporte.</button>
+            <!-- <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
+                Soporte.</button> -->
             <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-geo-alt-fill"></i></span> <?php echo $ip ?></button>
         </div>
     </div>

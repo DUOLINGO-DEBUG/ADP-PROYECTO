@@ -3,8 +3,7 @@ date_default_timezone_set('America/El_Salvador');
 
 function Obtner_Fecha_sv()
 {
-    // Obtiene la fecha actual en El Salvador
-    $fecha = date('Y-m-d'); // Formato: año-mes-día
+    $fecha = date('Y-m-d'); 
     return $fecha;
 }
 

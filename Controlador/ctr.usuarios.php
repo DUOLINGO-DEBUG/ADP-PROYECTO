@@ -5,7 +5,6 @@ require_once('../Modelo/Modelo.usuarios.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroUsuario'])) {
 
-
     // ---------------------------------------------------------------[POST]
     $nombre01_usuario = isset($_POST['primer_nombre']) ? $_POST['primer_nombre'] : "";
     $nombre02_usuario = isset($_POST['segundo_nombre']) ? $_POST['segundo_nombre'] : "";

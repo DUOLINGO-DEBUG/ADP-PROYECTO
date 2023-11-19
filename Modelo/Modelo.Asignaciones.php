@@ -133,4 +133,24 @@ class Asignaciones{
             $pdo = null; 
         }
     }
+
+    public function Listar_Asignaciones_id($id_tecnico, $id_reporte)
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM asignaciones INNER JOIN reportes ON asignaciones.Reporte_Reportes = reportes.Id_Reporte WHERE asignaciones.Tecnico_Usuarios = ? AND asignaciones.Reporte_Reportes = ?;");
+            $stmt->bindParam(1, $id_tecnico);
+            $stmt->bindParam(2, $id_reporte);
+            $stmt->execute();
+            $asignaciones_tec_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $asignaciones_tec_id;
+
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; 
+        }
+    }
 }

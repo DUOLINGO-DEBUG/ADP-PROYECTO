@@ -37,3 +37,4 @@ function desencriptarURL($cadena) {
 
 // echo '' . $aes_private . '[+]' . $aes_public;
 // echo "Versión de PHP: " . phpversion();              
+$clave = 'KARLA';

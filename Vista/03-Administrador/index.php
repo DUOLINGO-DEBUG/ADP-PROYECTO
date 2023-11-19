@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="img/" type="image/x-icon" sizes="16x16 32x32 48x48">
 
     <!-- ----------------------------------------------------------------------------------------------JS -->
     <script src="../../js/animacion.js"></script>
@@ -1189,20 +1190,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
             data: datosBarrasHorizontales,
             options: {
                 indexAxis: 'y',
-                responsive: true,
-                scales: {
-                    x: {
-                        ticks: {
-                            autoSkip: true,
-                            maxTicksLimit: 5 // Ajusta el número máximo de etiquetas en el eje X
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            fontSize: window.innerWidth < 600 ? 10 : 14 // Ajusta el tamaño de la fuente según el ancho de la pantalla
-                        }
-                    }
-                }
+                responsive: true
             }
         };
 
