@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>Técnico</title>
+    <title>TÉCNICO</title>
+    <link rel="icon" href="../../img/logo_1_000010.svg" type="image/x-icon" sizes="16x16 32x32 48x48">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- ----------------------------------------------------------------------------------------------CSS -->
@@ -63,7 +64,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active position-relative" id="tab2-tab" data-bs-toggle="tab" href="tab" role="tab" aria-controls="tab1" aria-selected="false">Listado de Reportes
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                         <?php if (is_array($tarea_tecnicos)) {
                             echo count($tarea_tecnicos);
                         } else {
@@ -112,8 +113,21 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
                                         <td><?php echo $tarea_tecnicos_foreach['Area_Reporte']; ?></td>
                                         <td><?php echo $tarea_tecnicos_foreach['Marca_Reporte']; ?></td>
                                         <td><?php echo $tarea_tecnicos_foreach['Modelo_Reporte']; ?></td>
-                                        <td><i class="bi bi-square-fill"></i></td>
-                                        <td><a href="reporte.php?report=<?php echo encriptar($tarea_tecnicos_foreach['Id_Reporte']); ?>" class="btn btn-success btn-sm" id="<?php echo encriptar($tarea_tecnicos_foreach['Id_Reporte']); ?>"><i class="bi bi-pie-chart-fill"></i> VER PROGRESO</a></td>
+                                        <?php
+                                        if (strlen($tarea_tecnicos_foreach['Fecha_Finalizacion_Reporte']) > 6) {
+                                        ?>
+                                            <td><i class="bi bi-square-fill text-success"></i></td>
+                                            <td><a href="reporte.php?report=<?php echo encriptar($tarea_tecnicos_foreach['Id_Reporte']); ?>" class="btn btn-success btn-sm" id="<?php echo encriptar($tarea_tecnicos_foreach['Id_Reporte']); ?>"><i class="bi bi-pie-chart-fill"></i> VER PROGRESO</a></td>
+
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <td><i class="bi bi-square-fill text-warning"></i></td>
+                                            <td><a href="reporte.php?report=<?php echo encriptar($tarea_tecnicos_foreach['Id_Reporte']); ?>" class="btn btn-warning btn-sm" id="<?php echo encriptar($tarea_tecnicos_foreach['Id_Reporte']); ?>"><i class="bi bi-pie-chart-fill"></i> VER PROGRESO</a></td>
+
+                                        <?php
+                                        }
+                                        ?>
                                         <td><button type="button" class="btn btn_zacamil btn-sm" data-bs-toggle="modal" data-bs-target="#rpr<?php echo $tarea_tecnicos_foreach['Id_Reporte']; ?>"><i class="bi bi-card-checklist"></i> DETALLES</button></td>
                                     </tr>
 
@@ -207,7 +221,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </form>
                                         </div>

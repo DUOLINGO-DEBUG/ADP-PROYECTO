@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>Técnico Reporte</title>
+    <title>TÉCNICO</title>
+    <link rel="icon" href="../../img/logo_1_000010.svg" type="image/x-icon" sizes="16x16 32x32 48x48">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- ----------------------------------------------------------------------------------------------CSS -->
@@ -47,6 +48,7 @@ if (!empty($mensaje_sesion)) {
         $Porcentaje = 0;
         $id_reporte_tec = 0;
         $Porcentaje_restante = 0;
+        $fecha_reporte_tec = '';
         // ---------------------------------------------------[TIEMPO]
         require_once('../../Controlador/ctr.time.php');
 
@@ -54,7 +56,7 @@ if (!empty($mensaje_sesion)) {
         require_once('../../Modelo/Modelo.Asignaciones.php');
         $asignaciones = new Asignaciones();
         $tarea_tecnicos = $asignaciones->Listar_Asignaciones_id($_SESSION['Id_Usuario'], $idreporte);
-        
+
 
         // ---------------------------------------------------[PROGRESO => REPORTES]
         require_once('../../Modelo/Modelo.Progreso.php');
@@ -69,12 +71,13 @@ if (!empty($mensaje_sesion)) {
             }
         }
         $Porcentaje_restante = 100 - $Porcentaje;
-
     } else {
         header('Location: index.php');
+        exit;
     }
 } else {
     header('Location: index.php');
+    exit;
 }
 
 ?>
@@ -101,7 +104,7 @@ if (!empty($mensaje_sesion)) {
         <!-- Pestañas -->
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active position-relative" id="tab2-tab" data-bs-toggle="tab" href="tab" role="tab" aria-controls="tab1" aria-selected="false">Listado de Reportes
+                <a class="nav-link active position-relative" id="tab2-tab" data-bs-toggle="tab" href="tab" role="tab" aria-controls="tab1" aria-selected="false">Progreso y Detalles del Reporte
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                         <span class="visually-hidden">unread messages</span>
                     </span>
@@ -125,7 +128,8 @@ if (!empty($mensaje_sesion)) {
 
                                             foreach ($tarea_tecnicos as $tarea_tecnicos_foreach) {
                                                 $titulo_name = $tarea_tecnicos_foreach['Nombre_Equipo_Reporte'] . ' ' . $tarea_tecnicos_foreach['Marca_Reporte'];
-                                                
+                                                $fecha_reporte_tec = $tarea_tecnicos_foreach['Fecha_Finalizacion_Reporte'];
+
                                     ?>
                                                 <div class="col-lg">
                                                     <div class="input-group mb-3">
@@ -212,12 +216,38 @@ if (!empty($mensaje_sesion)) {
                                                 <canvas id="doughnutChart"></canvas>
                                             </div>
                                         </div>
-                                        <div class="col-lg text-center">
-                                            <hr style="background-color: #01274e;">
-                                            <td><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#agregar"><i class="bi bi-terminal-plus"></i> AGREGAR PROGRESO</button></td>
-                                            <p></p>
-                                            <td><a href="index.php" class="btn btn_zacamil btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> ELEGIR OTRO REPORTE</a></td>
-                                        </div>
+                                        <?php
+                                        if ($Porcentaje == 100) {
+
+                                        ?>
+                                            <div class="col-lg text-center d-grid gap-2">
+                                                <hr style="background-color: #01274e;">
+                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#agregar"><i class="bi bi-terminal-plus"></i> AGREGAR PROGRESO</button>
+                                                <a href="index.php" class="btn btn_zacamil btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> ELEGIR OTRO REPORTE</a>
+                                                <?php
+                                                if (strlen($fecha_reporte_tec) > 6) {
+                                                ?>
+                                                    <button href="index.php" class="btn btn-success btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> REPORTE FINALIZADO</button>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <a href="../../Controlador/ctr.progreso.php?progreso=<?php echo encriptar($idreporte) ?>" class="btn btn-warning btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> FINALIZAR REPORTE</a>
+                                                <?php
+                                                }
+                                                ?>
+                                            </div>
+                                        <?php
+
+                                        } else {
+                                        ?>
+                                            <div class="col-lg text-center d-grid gap-2">
+                                                <hr style="background-color: #01274e;">
+                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#agregar"><i class="bi bi-terminal-plus"></i> AGREGAR PROGRESO</button>
+                                                <a href="index.php" class="btn btn_zacamil btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> ELEGIR OTRO REPORTE</a>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                         <div>
                                             <div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregacion" aria-hidden="true">
                                                 <div class="modal-dialog bg-white" role="document">
@@ -228,8 +258,8 @@ if (!empty($mensaje_sesion)) {
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="modal-body">
-                                                            <input type="hidden" id="id_reporte_progreso" name="id_reporte_progreso" value="<?php echo encriptar($idreporte);?>">
-                                                            <input type="hidden" id="fecha_progreso" name="fecha_progreso" value="<?php echo Obtner_Fecha_sv() .' '.Obtener_Hora_sv(); ?>">
+                                                                <input type="hidden" id="id_reporte_progreso" name="id_reporte_progreso" value="<?php echo encriptar($idreporte); ?>">
+                                                                <input type="hidden" id="fecha_progreso" name="fecha_progreso" value="<?php echo Obtner_Fecha_sv() . ' ' . Obtener_Hora_sv(); ?>">
 
                                                                 <div class="input-group mb-3">
                                                                     <span class="input-group-text icon_zacamil"><i class="bi bi-pc-display-horizontal"></i></span>
@@ -253,9 +283,9 @@ if (!empty($mensaje_sesion)) {
                                                                     </div>
                                                                 </div>
                                                                 <div class="input-group mb-3">
-                                                                    <span id="rango_label" class="input-group-text icon_zacamil">0<i class="bi bi-percent"></i></span>
+                                                                    <span id="rango_label" class="input-group-text icon_zacamil"><?php echo $Porcentaje ?><i class="bi bi-percent"></i></span>
                                                                     <div class="form-floating">
-                                                                        <input type="range" name="porcentaje_progreso" id="customRange1" class="form-range" min="<?php echo $Porcentaje ?>" max="100" require>
+                                                                        <input type="range" name="porcentaje_progreso" id="customRange1" class="form-range" min="<?php echo $Porcentaje ?>" max="100" values="<?php echo $Porcentaje ?>" require>
                                                                     </div>
                                                                 </div>
 
@@ -283,7 +313,7 @@ if (!empty($mensaje_sesion)) {
                                 <hr>
                                 <h6 class="text-center">HISTORIAL PROGRESOS</h6>
                                 <div class="progress" role="progressbar" aria-label="Success striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar progress-bar-striped bg-success" style="width: <?php echo $Porcentaje; ?>%">[<?php echo $Porcentaje.'% '.$titulo_name ?>]</div>
+                                    <div class="progress-bar progress-bar-striped bg-success" style="width: <?php echo $Porcentaje; ?>%">[<?php echo $Porcentaje . '% ' . $titulo_name ?>]</div>
                                 </div>
                                 <p></p>
                                 <table id="tecnico" class="display">
@@ -312,7 +342,9 @@ if (!empty($mensaje_sesion)) {
                                                     <td><?php echo $titulo_name ?></td>
                                                     <td><?php echo $progresos_foreach['Titulo_Progreso']; ?></td>
                                                     <td><?php echo $progresos_foreach['Descripcion_Progreso'] ?></td>
-                                                    <td><p class="btn btn-success btn-sm btn-striped"><?php echo $progresos_foreach['Porcentaje_Progreso'].'<i class="bi bi-percent"></i>'; ?></p></td>
+                                                    <td>
+                                                        <p class="btn btn-success btn-sm btn-striped"><?php echo $progresos_foreach['Porcentaje_Progreso'] . '<i class="bi bi-percent"></i>'; ?></p>
+                                                    </td>
                                                     <td><?php echo formatearFecha($progresos_foreach['Fecha_Progreso']); ?></td>
                                                 </tr>
                                             <?php

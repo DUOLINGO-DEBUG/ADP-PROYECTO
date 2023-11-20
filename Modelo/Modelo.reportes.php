@@ -244,6 +244,29 @@ class Reporte
         }
     }
 
+    public function editar_oferta_finalizar($id_usuario_reporte, $fecha, $estado)
+    {
+        //require("conexion.class.php");
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+
+        try {
+
+            $stmt = $pdo->prepare("UPDATE `reportes`  SET `Estado_Reporte` = ?, `Fecha_Finalizacion_Reporte` = ? WHERE `reportes`.`Id_Reporte` = ?;");
+            $stmt->bindParam(1, $estado);
+            $stmt->bindParam(2, $fecha);
+            $stmt->bindParam(3, $id_usuario_reporte);
+            $stmt->execute();
+
+            // return $xd;
+            return true;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+        }
+    }
+
     // 
 
     public function Listar_Reportes()

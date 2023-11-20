@@ -97,7 +97,8 @@ class Progreso{
         $conn = new Conexion;
         $pdo = $conn->connect();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM progreso WHERE progreso.Reporte_Reportes = 3 ORDER BY progreso.Porcentaje_Progreso DESC;");
+            $stmt = $pdo->prepare("SELECT * FROM progreso WHERE progreso.Reporte_Reportes = ? ORDER BY progreso.Porcentaje_Progreso DESC;");
+            $stmt->bindParam(1, $id_reporte);
             $stmt->execute();
             $progresos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $progresos;

@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>Jefes de Área</title>
+    <title>JEFES DE ÁREA</title>
+    <link rel="icon" href="../../img/logo_1_000010.svg" type="image/x-icon" sizes="16x16 32x32 48x48">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- ----------------------------------------------------------------------------------------------CSS -->

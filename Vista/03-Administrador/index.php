@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>ZACAMIL</title>
+    <title>ADMINISTRADOR</title>
+    <link rel="icon" href="img/logo_1_000010.svg" type="image/x-icon" sizes="16x16 32x32 48x48">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- ----------------------------------------------------------------------------------------------CSS -->
@@ -1014,6 +1015,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
                             </div>
                         </div>
                     </div>
+                    <br><br>
                 </div>
             </div>
         </div>

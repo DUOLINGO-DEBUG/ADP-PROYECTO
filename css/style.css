@@ -149,11 +149,43 @@ body {
 @media (min-width: 992px) {
     .card_pc {
         width: 16rem;
+        height: 23rem;
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .card_pc {
         width: 20rem;
+        height: 30rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .card_pc {
+        width: 20rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .card_pc {
+        width: 31rem;
+    }
+}
+
+@media (min-width: 453px) and (max-width: 550px) {
+    .card_pc {
+        width: 25rem;
+    }
+}
+
+@media (min-width: 373px) and (max-width: 453px) {
+    .card_pc {
+        width: 20rem;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 372px) {
+    .card_pc {
+        width: 17rem;
     }
 }
