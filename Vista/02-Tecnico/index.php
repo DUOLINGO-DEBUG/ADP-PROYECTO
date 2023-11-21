@@ -194,7 +194,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text icon_zacamil"><i class="bi bi-body-text"></i></span>
                                                             <div class="form-floating">
-                                                                <textarea readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="descripcion_causante_reporte" required><?php echo $tarea_tecnicos_foreach['Descripcion_Incidente_Reporte']; ?></textarea>
+                                                                <textarea  style="height: 100px;" readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="descripcion_causante_reporte" required><?php echo $tarea_tecnicos_foreach['Descripcion_Incidente_Reporte']; ?></textarea>
                                                                 <label for="floatingTextarea">Descripción del causante del daño al equipo. <b class="importante_zacamil">*</b></label>
                                                             </div>
                                                         </div>
@@ -202,7 +202,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text icon_zacamil"><i class="bi bi-body-text"></i></span>
                                                             <div class="form-floating">
-                                                                <textarea readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="descripcion_consecuencia_reporte" required><?php echo $tarea_tecnicos_foreach['Descripcion_Error_Reporte']; ?></textarea>
+                                                                <textarea  style="height: 100px;" readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="descripcion_consecuencia_reporte" required><?php echo $tarea_tecnicos_foreach['Descripcion_Error_Reporte']; ?></textarea>
                                                                 <label for="floatingTextarea">Descripción del daño que tiene el equipo. <b class="importante_zacamil">*</b></label>
                                                             </div>
                                                         </div>
@@ -210,7 +210,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text icon_zacamil"><i class="bi bi-body-text"></i></span>
                                                             <div class="form-floating">
-                                                                <textarea required class="form-control" placeholder="Leave a comment here" id="anexo_id" name="anexo_reporte"><?php echo $tarea_tecnicos_foreach['Anexo_Reporte']; ?></textarea>
+                                                                <textarea style="height: 100px;" required class="form-control" placeholder="Leave a comment here" id="anexo_id" name="anexo_reporte"><?php echo $tarea_tecnicos_foreach['Anexo_Reporte']; ?></textarea>
                                                                 <label for="floatingTextarea">Anexo.</label>
                                                             </div>
                                                         </div>
@@ -233,13 +233,14 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 2)) {
                             if ($tareas_tecnicos_count == 0) {
                                 ?>
                                 <tr>
-                                    <td>Aquí no hay nada.</td>
-                                    <td>Aquí no hay nada.</td>
-                                    <td>Aquí no hay nada.</td>
-                                    <td>Aquí no hay nada.</td>
-                                    <td>Aquí no hay nada.</td>
-                                    <td>Aquí no hay nada.</td>
-                                    <td>Aquí no hay nada.</td>
+                                    <td>----</td>
+                                    <td>----</td>
+                                    <td>----</td>
+                                    <td>----</td>
+                                    <td>----</td>
+                                    <td>----</td>
+                                    <td>----</td>
+                                    <td>----</td>
                                 </tr>
                             <?php
                             }

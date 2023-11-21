@@ -3,6 +3,7 @@
 
 <?php
 $ip = file_get_contents('https://api.ipify.org');
+// $ip = '192.168.0.1';
 ?>
 
 <head>
@@ -35,7 +36,7 @@ require_once('Controlador/ctr.encriptacion.php');
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="img/logo_1_00001.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            PROYECTO-ADP <b style="font-size: 10px;">v1.3.4</b>
+            PROYECTO-ADP <b style="font-size: 10px;">v1.9.7</b>
         </a>
         <div>
             <!-- <button class="btn btn_zacamil btn-sm" type="submit"><span><i class="bi bi-wrench-adjustable-circle-fill"></i></span>
@@ -92,41 +93,51 @@ require_once('Controlador/ctr.encriptacion.php');
                 <div class="col-12 col-md-4 col-lg-8 mt-2 h-50 ">
                     <div id="carouselExampleCaptions" class="carousel slide shadow">
                         <div class="carousel-indicators">
-                            <button style="background-color: #01274e;" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button style="background-color: #01274e;" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button style="background-color: #01274e;" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="https://placehold.co/1000x500?text=MANUALES" class="d-block w-100" alt="...">
+                                <img src="img/slide_00002.png" class="d-block w-100" alt="...">
+                                <!-- <img src="https://placehold.co/1000x500?text=MANUALES" class="d-block w-100" alt="..."> -->
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5 class="color_zacamil">Manuales ADP</h5>
-                                    <!-- <a href="#" class="btn btn-dark">WAZA</a> -->
-                                    <!-- <button class="btn_Zacamil" id="downloadButton">Click pls</button> -->
-                                    <p class="color_zacamil">No olvides consultar tu manual de usuario.</p>
+                                    <!-- <p style="background-color: #21252950;">¿Tienes problemas a la hora de registrarte?</p> -->
+                                    <form action="Controlador/ctr.documentos.php" method="post">
+                                        <input type="hidden" name="numero_documento" value="1">
+                                        <button class="btn btn-dark btn-sm" type="submit"><i class="bi bi-download"></i> DESCARGA 1/3</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://placehold.co/1000x500?text=REPORTES" class="d-block w-100" alt="...">
+                                <img src="img/slide_00003.png" class="d-block w-100" alt="...">
+                                <!-- <img src="https://placehold.co/1000x500?text=MANUALES" class="d-block w-100" alt="..."> -->
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5 class="color_zacamil">Reportes Zacamil</h5>
-                                    <p class="color_zacamil">Crea tus reportes, Para hacer mantenimiento o reparaciones a los equipos.</p>
+                                    <!-- <p style="background-color: #21252950;">¿Tienes problemas a la hora de registrarte?</p> -->
+                                    <form action="Controlador/ctr.documentos.php" method="post">
+                                        <input type="hidden" name="numero_documento" value="2">
+                                        <button class="btn btn-dark btn-sm" type="submit"><i class="bi bi-download"></i> DESCARGA 2/3</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://placehold.co/1000x500?text=USUARIOS" class="d-block w-100" alt="...">
+                            <img src="img/slide_00004.png" class="d-block w-100" alt="...">
+                                <!-- <img src="https://placehold.co/1000x500?text=MANUALES" class="d-block w-100" alt="..."> -->
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5 class="color_zacamil">Usuarios nuevos!.</h5>
-                                    <p class="color_zacamil">Para la creación de cuentas consulte con el Administrador.</p>
+                                    <!-- <p style="background-color: #21252950;">¿Tienes problemas a la hora de registrarte?</p> -->
+                                    <form action="Controlador/ctr.documentos.php" method="post">
+                                        <input type="hidden" name="numero_documento" value="3">
+                                        <button class="btn btn-dark btn-sm" type="submit"><i class="bi bi-download"></i> DESCARGA 3/3</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" style="background-color: #01274e;" aria-hidden="true"></span>
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Anterior</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" style="background-color: #01274e;" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Siguiente</span>
                         </button>
                     </div>
@@ -140,23 +151,21 @@ require_once('Controlador/ctr.encriptacion.php');
         <div class="modal-dialog modal-dialog-scrollable">
             <form class="modal-content" action="Controlador/ctr.usuarios.php" method="post" `name="RegistroUsuario">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><img src="img/logo_1_00001.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> REGISTRO</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel"><img src="img/logo_1_00001.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> REGISTRO USUARIO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- ------------------------------------------------------------------[CUERPO] -->
                 <div class="modal-body">
-                    <!-- <div class="container text-center m-2">
-                        <img src="img/logo_1_00001.svg" width="50px" class="img-fluid" alt="...">
-                    </div> -->
+
                     <div class="input-group mb-3">
                         <span class="input-group-text icon_zacamil"><i class="bi bi-person"></i></span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" name="primer_nombre" placeholder="" maxlength="15" minlength="5" required>
+                            <input type="text" class="form-control" id="floatingInput" name="primer_nombre" placeholder="" maxlength="15" minlength="2" required>
                             <label for="floatingInput">Primer Nombre <b class="importante_zacamil">*</b></label>
                         </div>
 
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" name="segundo_nombre" placeholder="" maxlength="15" minlength="5">
+                            <input type="text" class="form-control" id="floatingInput" name="segundo_nombre" placeholder="" maxlength="15" minlength="2">
                             <label for="floatingInput">Segundo Nombre</label>
                         </div>
                     </div>
@@ -164,16 +173,17 @@ require_once('Controlador/ctr.encriptacion.php');
                     <div class="input-group mb-3">
                         <span class="input-group-text icon_zacamil"><i class="bi bi-person"></i></span>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" name="primer_apellido" placeholder="" maxlength="15" minlength="5" required>
+                            <input type="text" class="form-control" id="floatingInput" name="primer_apellido" placeholder="" maxlength="15" minlength="3" required>
                             <label for="floatingInput">Primer Apellido <b class="importante_zacamil">*</b></label>
                         </div>
 
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" name="segundo_apellido" placeholder="" maxlength="15" minlength="5">
+                            <input type="text" class="form-control" id="floatingInput" name="segundo_apellido" placeholder="" maxlength="15" minlength="3">
                             <label for="floatingInput">Segundo Apellido</label>
                         </div>
                     </div>
-                    <!-- --------------------------------------------------------------[correo] -->
+                    <?php //-----------------------------------------------------------------[CORREO] 
+                    ?>
                     <div class="input-group mb-3">
                         <span class="input-group-text icon_zacamil"><i class="bi bi-envelope"></i></span>
                         <div class="form-floating">
@@ -182,7 +192,8 @@ require_once('Controlador/ctr.encriptacion.php');
                         </div>
                     </div>
 
-                    <!-- --------------------------------------------------------------[telefono] -->
+                    <?php //-----------------------------------------------------------------[TELEFONO] 
+                    ?>
                     <div class="input-group mb-3">
                         <span class="input-group-text icon_zacamil"><i class="bi bi-telephone"></i></span>
                         <div class="form-floating">

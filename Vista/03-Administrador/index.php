@@ -871,7 +871,7 @@ if (!isset($_SESSION["Id_Usuario"]) || ($_SESSION["Cargo_Cargos"] != 3)) {
 
                                             </div>
                                             <?php
-                                            if ($reportes_card['Estado_Reporte'] != 2) {
+                                            if ($reportes_card['Estado_Reporte'] == 4) {
                                             ?>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Cancelar</button>
