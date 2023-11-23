@@ -1,11 +1,11 @@
 # Nombre del Proyecto
 PROYECTO-ADP
 
-# Versiones
+## Versiones
 - Mysql=> v8.0.31
 - PHP=> v8.0.26
 
-# Instalación
+## Instalación
 [+] Instalar base de datos, script en BDD/ADP-PROYECT.SQL
 
 [+] sugerencia MySQL o SQL-server.
