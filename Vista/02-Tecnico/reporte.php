@@ -222,15 +222,19 @@ if (!empty($mensaje_sesion)) {
                                         ?>
                                             <div class="col-lg text-center d-grid gap-2">
                                                 <hr style="background-color: #01274e;">
-                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#agregar"><i class="bi bi-terminal-plus"></i> AGREGAR PROGRESO</button>
-                                                <a href="index.php" class="btn btn_zacamil btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> ELEGIR OTRO REPORTE</a>
+
                                                 <?php
                                                 if (strlen($fecha_reporte_tec) > 6) {
                                                 ?>
-                                                    <button href="index.php" class="btn btn-success btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> REPORTE FINALIZADO</button>
+                                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#agregar" disabled><i class="bi bi-terminal-plus"></i> AGREGAR PROGRESO</button>
+                                                    <a href="index.php" class="btn btn_zacamil btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> ELEGIR OTRO REPORTE</a>
+                                                    <a href="index.php" class="btn btn-success btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> REPORTE FINALIZADO</a>
                                                 <?php
                                                 } else {
                                                 ?>
+
+                                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#agregar" disabled><i class="bi bi-terminal-plus"></i> AGREGAR PROGRESO</button>
+                                                    <a href="index.php" class="btn btn_zacamil btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> ELEGIR OTRO REPORTE</a>
                                                     <a href="../../Controlador/ctr.progreso.php?progreso=<?php echo encriptar($idreporte) ?>" class="btn btn-warning btn-sm"><i class="bi bi-arrow-left-circle-fill"></i> FINALIZAR REPORTE</a>
                                                 <?php
                                                 }

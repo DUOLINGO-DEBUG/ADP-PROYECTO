@@ -99,12 +99,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['RegistroOferta'])) {
             }
 
             $aes_private01 = encriptar("1");
-            header('Location: ../Vista/03-Administrador/index.php?message=' . $aes_private01);
+            header('Location: ../Vista/03-Administrador/index.php');
             // include_once('');
             exit;
         } else {
             $aes_private01 = encriptar("2");
-            header('Location: ../Vista/03-Administrador/index.php?message=' . $aes_private01);
+            header('Location: ../Vista/03-Administrador/index.php');
             exit;
         }
     } else {

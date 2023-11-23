@@ -183,6 +183,7 @@ class Usuario
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($stmt->rowCount() == 1) {
+                $this->id_usuario = $usuario['Id_Usuario'];
                 $this->password_usuario = $usuario['Password_Usuario'];
                 $this->estado_estados = $usuario['Estado_Estados'];
                 return true;
@@ -322,6 +323,24 @@ class Usuario
             $stmt->bindParam(2, $id_admin);
             $stmt->bindParam(3, $cargo);
             $stmt->bindParam(4, $FechaHora_Actual);
+            $stmt->execute();
+            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return true;
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        } finally {
+            $pdo = null; // Cierra la conexión en cualquier caso
+        }
+    }
+
+    public function Cambio_password($password, $activo, $id_usuario){
+        $conn = new Conexion;
+        $pdo = $conn->connect();
+        try {
+            $stmt = $pdo->prepare("UPDATE `usuarios` SET `Password_Usuario` = ? , `Estado_Estados` = ? WHERE `usuarios`.`Id_Usuario` = ?;");
+            $stmt->bindParam(1, $password);
+            $stmt->bindParam(2, $activo);
+            $stmt->bindParam(3, $id_usuario);
             $stmt->execute();
             $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return true;

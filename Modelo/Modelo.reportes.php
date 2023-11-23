@@ -275,7 +275,7 @@ class Reporte
         $conn = new Conexion;
         $pdo = $conn->connect();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM reportes INNER JOIN usuarios ON reportes.Usuario_Usuarios = usuarios.Id_Usuario ORDER BY reportes.Estado_Reporte DESC;");
+            $stmt = $pdo->prepare("SELECT * FROM reportes INNER JOIN usuarios ON reportes.Usuario_Usuarios = usuarios.Id_Usuario ORDER BY reportes.Id_Reporte DESC");
             $stmt->execute();
             $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $reportes;

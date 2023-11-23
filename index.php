@@ -2,8 +2,17 @@
 <html lang="es">
 
 <?php
-$ip = file_get_contents('https://api.ipify.org');
-// $ip = '192.168.0.1';
+try {
+    $ip = file_get_contents('https://api.ipify.org');
+
+    if ($ip === false) {
+        $ip = 'NO HAY IP <i class="bi bi-wifi-off"></i>';
+    } else {
+    }
+} catch (Exception $e) {
+    // Manejar la excepción generada
+    // echo "Error: " . $e->getMessage();
+}
 ?>
 
 <head>
@@ -81,7 +90,7 @@ require_once('Controlador/ctr.encriptacion.php');
 
                                 <br>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="submit" class="btn btn_zacamil btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No olvides que el formato del correo es [@zacamil.sv]"><i class="bi bi-box-arrow-right"></i> Iniciar sección</button>
+                                    <button type="submit" class="btn btn_zacamil btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No olvides que el formato del correo es [@zacamil.sv]"><i class="bi bi-box-arrow-right"></i> Iniciar sesión</button>
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrar <i class="bi bi-box-arrow-in-up-right"></i></button>
                                 </div>
                                 </br>
@@ -121,7 +130,7 @@ require_once('Controlador/ctr.encriptacion.php');
                                 </div>
                             </div>
                             <div class="carousel-item">
-                            <img src="img/slide_00004.png" class="d-block w-100" alt="...">
+                                <img src="img/slide_00004.png" class="d-block w-100" alt="...">
                                 <!-- <img src="https://placehold.co/1000x500?text=MANUALES" class="d-block w-100" alt="..."> -->
                                 <div class="carousel-caption d-none d-md-block">
                                     <!-- <p style="background-color: #21252950;">¿Tienes problemas a la hora de registrarte?</p> -->
@@ -291,8 +300,6 @@ require_once('Controlador/ctr.encriptacion.php');
                 break;
             case 5:
                 $correo_seccion =  desencriptar(desencriptarURL(isset($_GET['usuario']) ? $_GET['usuario'] : ""));
-                // echo $correo_seccion;
-                // $titulo_alert = 'Hay un fallo, oh no hermano' . $correo_seccion;
                 if (isset($correo_seccion) && !empty($correo_seccion)) {
                     $titulo_alert = '<strong style="color:#01274e;">Cuenta Registrada</u></strong>';
                     $text_alert = '';
@@ -316,17 +323,41 @@ require_once('Controlador/ctr.encriptacion.php');
                 break;
 
             case 7:
+                $correo_seccion =  desencriptar(desencriptarURL(isset($_GET['usuario']) ? $_GET['usuario'] : ""));
+                $id_seccion =  desencriptar(desencriptarURL(isset($_GET['usr']) ? $_GET['usr'] : ""));
+
+                if (isset($correo_seccion) && !empty($correo_seccion)) {
+                    $titulo_alert = '¡Cuenta en modo recuperación!';
+                    $text_alert = '';
+                    $icono_alert = 'warning';
+
+                    $icono_color = "iconColor: '#ffc107',";
+                    $html = "html:'" . plantilla_cuenta_recuperacion($correo_seccion, $id_seccion) . "',";
+                    $btntxt_alert = 'No Guardar';
+                    $btncolor_alert = '#01274e';
+
+                    // echo '<h1>'.$html.'</h1>';
+                }
+                break;
+
                 $titulo_alert = '¡Cuenta en modo recuperación!';
                 $text_alert = 'Cuenta en modo recuperación.';
                 $icono_alert = 'warning';
-                $btntxt_alert = 'Aceptar';
-                $btncolor_alert = '#01274e';
-                break;
+                // $btntxt_alert = 'Aceptar';
+                // $btncolor_alert = '#01274e';
+                // break;
 
             case 8:
                 $titulo_alert = '¡Cuenta bloqueada!';
                 $text_alert = 'Un administrador bloqueo su cuenta.';
                 $icono_alert = 'error';
+                $btntxt_alert = 'Aceptar';
+                $btncolor_alert = '#01274e';
+                break;
+            case 9:
+                $titulo_alert = '¡Cuenta recuperada!';
+                $text_alert = 'Ahora puede iniciar sección.';
+                $icono_alert = 'success';
                 $btntxt_alert = 'Aceptar';
                 $btncolor_alert = '#01274e';
                 break;
@@ -392,8 +423,10 @@ function plantilla_cuenta_activada($correo)
     return $plantilla;
 }
 
-function plantilla_cuenta_recuperacion()
+function plantilla_cuenta_recuperacion($correo, $usr)
 {
+    $plantilla = '<div class="input-group mb-3"><span class="input-group-text bg-warning">TU CORREO:</span><input type="text" value="' . $correo . '" id="correozacamil" class="form-control" aria-describedby="correozacamilhelp" readonly></div><div id="correozacamilhelp" class="form-text"><ol class="list-group list-group-numbered"><li class="list-group-item d-flex justify-content-between align-items-start"><div class="ms-2 me-auto">Debera digitar una nueva contraseña.</div><span class="badge bg-warning rounded-pill">Importante</span></li><li><form class="" action="Controlador/ctr.login.php" method="post" name="cambiarpassword"><input value="' . $usr . '" type="hidden" class="form-control" id="id_usr" name="id_usr"><div class="input-group mb-3"><span class="input-group-text bg-warning" id="pass1"><i class="bi bi-key"></i></span><div class="form-floating"><input type="text" class="form-control" id="password" name="password" placeholder="" maxlength="16" minlength="8"><label for="password1">Contraseña</label></div></div><button class="btn btn-success btn-sm" type="submit">Guardar nueva contraseña</button></form></li></ol></div>';
+    return $plantilla;
 }
 ?>
 

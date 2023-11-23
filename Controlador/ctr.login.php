@@ -12,8 +12,8 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
     $usuario = new Usuario;
     $usuario->obtenerContra($email);
     $hashPassword = $usuario->getPasswordUsuario();
+    $id_usuario_login = $usuario->getIdUsuario();
 
-    
     if ($usuario->getEstadoEstados() == 1) {
 
         if ($usuario->getPasswordUsuario() == false) {
@@ -54,19 +54,24 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
             }
         }
     } else {
+
         switch ($usuario->getEstadoEstados()) {
             case 2:
                 $aes_private = encriptar("8");
                 break;
             case 3:
-                $aes_private = encriptar("7");
+                $aes_private01 = encriptar("7");
+                $aes_private02 = encriptar($email);
+                $aes_private03 = encriptar($id_usuario_login);
+                header('Location: ../index.php?message=' . $aes_private01 . '&usuario=' . $aes_private02 . '&usr=' . $aes_private03);
+                exit;
                 break;
             case 4:
                 $aes_private = encriptar("6");
                 break;
             default:
                 $aes_private = encriptar("1");
-            break;
+                break;
         }
         // $aes_private = encriptar("waza");
         echo $usuario->getEstadoEstados();
@@ -74,3 +79,25 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
         exit;
     }
 }
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_usr'])) {
+    $usr = $_POST['id_usr'];  
+    $password = $_POST['password'];
+
+    $hash_contrasena = password_hash($password, PASSWORD_DEFAULT);
+
+    $usuario_pwd = new Usuario;
+    $cambio_pasword = $usuario_pwd->Cambio_password($hash_contrasena, 1, $usr);
+
+    if ($cambio_pasword == true) {
+        $aes_private01 = encriptar("9");
+        header('Location: ../index.php?message=' . $aes_private01);
+        exit;
+    } else {
+        header('Location: ../index.php');
+        exit;
+    }
+}
+
+    
