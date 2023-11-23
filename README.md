@@ -19,7 +19,9 @@ PROYECTO-ADP
 [+] hacer pruebas con las cuentas:
 
 [-->] user=> duolingo.debug1@zacamil.sv, password=> 1234567890
+
 [-->] user=> duolingo.debug2@zacamil.sv, password=> 1234567890
+
 [-->] user=> duolingo.debug3@zacamil.sv, password=> 1234567890
 
 # Creador
