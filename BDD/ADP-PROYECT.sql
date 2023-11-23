@@ -96,8 +96,6 @@ CREATE TABLE MES_REPORTE(
     PRIMARY KEY (Id_MesReporte)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
-----------------------------------------------------------------------[DATOS]
-
 INSERT INTO `estado` (`Id_Estado`, `Nombre_Estado`, `Descripcion_Estado`) VALUES
 (1, 'Cuenta Activa', 'La expresión \"cuenta activa\" se refiere a una cuenta o perfil de usuario que está actualmente en uso o habilitada. Indica que la cuenta está activa y disponible para su uso, lo que implica que el usuario puede iniciar sesión, interactuar o realizar acciones relacionadas con esa cuenta en un sistema, plataforma o servicio en línea.'),
 (2, 'Cuenta Desactivada', '\r\nLa expresión \"cuenta desactivada\" se refiere a una cuenta de usuario que ha sido inhabilitada o suspendida temporal o permanentemente. Esto implica que el usuario no puede acceder ni utilizar su cuenta en un sistema, plataforma o servicio en línea en ese momento. La desactivación de una cuenta puede deberse a diversas razones, como incumplimiento de normas, inactividad prolongada o por solicitud del usuario. En resumen, una \"cuenta desactivada\" indica que el acceso y las funcionalidades asociadas a esa cuenta están temporalmente o definitivamente restringidas.'),
@@ -111,3 +109,8 @@ INSERT INTO `cargos` (`Id_Cargo`, `Nombre_Cargo`, `Descripcion_Cargo`) VALUES
 (3, 'Administrador', 'Un usuario con la categoría \"administrador\" (administrador) es un tipo de usuario que posee privilegios y permisos especiales en un sistema, aplicación, sitio web o plataforma. A continuación, se proporciona una descripción general de lo que significa ser un usuario de categoría \"administrador\"');
 COMMIT;
 
+INSERT INTO `usuarios` (`Id_Usuario`, `Usuario_Usuario`, `Llave_Usuario`, `Nombre_Usuario`, `Apellido_Usuario`, `Correo_Usuario`, `Telefono_Usuario`, `Password_Usuario`, `Fecha_Creacion_Usuario`, `Estado_Estados`, `Bloqueo_Temporal_Usuario`, `Cargo_Cargos`) VALUES
+(1, 'duolingo.debug3@zacamil.sv', NULL, 'Duolingo', 'Debug3', 'Jonnathan.urquilla@gmail.com', 72963923, '$2y$10$zQSInz1gOy4TkEfYg1r5yODBSd8ZYp3nyQ3Z0I3ZhHaom0AHhJ5J.', '2023-11-11 20:40:11', 1, 0, 3),
+(2, 'duolingo.debug2@zacamil.sv', NULL, 'Duolingo', 'Debug2', 'Jonnathan.urquilla@gmail.com', 72963923, '$2y$10$oVvJLc25Zq364zMzpKS7b.IdkStTFot8gTjaoeROdwKvx6M9s5/2K', '2023-11-11 20:42:45', 1, 0, 2),
+(3, 'duolingo.debug1@zacamil.sv', NULL, 'Duolingo', 'Debug1', 'Jonnathan.urquilla@gmail.com', 72963923, '$2y$10$cjtzoC2SlccFTv45gvBohuYTztBbVlSamABC.qGm6myl0wK.qh8OO', '2023-11-11 21:03:38', 1, 0, 1);
+COMMIT;
